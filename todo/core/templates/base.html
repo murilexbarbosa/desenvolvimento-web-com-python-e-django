@@ -28,10 +28,10 @@
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="{% url 'nova_categoria' %}">Categorias</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Disabled</a>
@@ -52,14 +52,14 @@
       </div>
     </nav>
 
+
     <main role="main" class="container">
+      {% block body %}
 
-      <div class="starter-template">
-        <h1>Hello World!</h1>
-        <p class="lead">Hello World<br> Usando Twitter Bootstrap.</p>
-      </div>
-
+      {% endblock body %}
     </main><!-- /.container -->
+
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
