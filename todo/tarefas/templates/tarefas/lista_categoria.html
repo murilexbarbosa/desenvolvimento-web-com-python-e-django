@@ -1,0 +1,22 @@
+{% extends "base_html" %}
+
+{% block body %}
+    <h1>Lista de Categorias</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Categoria</th>
+                <th>Descrição</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in categorias %}
+                <tr>
+                    <td>{{ c.nome }}</td>
+                    <td>{{ c.descricao }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock body %}

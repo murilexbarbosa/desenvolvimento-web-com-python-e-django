@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Categoria
 
 from .forms import CategoriaForm,TarefaForm
 # Create your views here.
@@ -16,6 +17,10 @@ def nova_categoria(request):
     else:
         form = CategoriaForm()
     return render(request, 'tarefas/nova_categoria.html', {'form': form})
+
+def lista_categoria(request):
+    categorias = Categoria.objects.all()
+    return render(request, 'tarefas/lista_categoria.html', {'categorias': categorias})
 
 def nova_tarefa(request):
     if request.method == 'POST':
