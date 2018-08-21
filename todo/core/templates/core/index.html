@@ -11,6 +11,7 @@
                     <th>Data Final</th>
                     <th>Prioridade</th>
                     <th>Categoria</th>
+                    <th colspan="2" style="text-align:center">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -21,10 +22,13 @@
                         <td>{{ t.data_final }}</td>
                         <td>{{ t.get_prioridade_display }}</td>
                         <td>{{ t.categoria }}</td>
+                        <td><a href="#">Editar</a></td>
+                        <td><a href="{% url 'delete_tarefa' t.id %}">Excluir</a></td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <a href="{% url 'nova_tarefa' %}" class="btn btn_default">Adicionar Tarefa</a>
     </div>
 
 {% endblock body %}

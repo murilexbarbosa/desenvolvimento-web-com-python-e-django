@@ -20,7 +20,7 @@ from todo.core import views
 from todo.tarefas import urls as tarefas_urls
 
 urlpatterns = [
-    path(r'', views.home),
+    path(r'', views.home, name='core'),
     path('tarefas/', include(tarefas_urls)),
     path('admin/', admin.site.urls),
 ]

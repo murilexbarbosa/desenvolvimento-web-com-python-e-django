@@ -1,6 +1,5 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from .models import Categoria
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Categoria, Tarefa
 
 from .forms import CategoriaForm,TarefaForm
 # Create your views here.
@@ -27,9 +26,21 @@ def nova_tarefa(request):
         form = TarefaForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse('Tarefa adicionada com sucesso!')
+            return redirect('core')
         else:
             print(form.errors)
     else:
         form = TarefaForm()
     return render(request, 'tarefas/nova_tarefa.html', {'form': form})
+
+
+def delete_tarefa(request, id):
+    tarefa = Tarefa.objects.get(id=id).delete()
+    return redirect('core')
+
+
+def edita_tarefa(request, id):
+    tarefa = get_object_or_404(Tarefa, id=id)
+    if request.method == 'POST':
+        form = TarefaForm(request.POST)
+
