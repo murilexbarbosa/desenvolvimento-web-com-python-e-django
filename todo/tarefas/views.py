@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Categoria
 
@@ -11,7 +11,7 @@ def nova_categoria(request):
         form = CategoriaForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponse('Categoria adicionada com sucesso!')
+            return redirect('lista_categoria')
         else:
             print(form.errors)
     else:
