@@ -39,8 +39,16 @@ def delete_tarefa(request, id):
     return redirect('core')
 
 
-def edita_tarefa(request, id):
-    tarefa = get_object_or_404(Tarefa, id=id)
+def editar_tarefa(request, id):
+    tarefa = Tarefa.objects.get(id=id)
     if request.method == 'POST':
-        form = TarefaForm(request.POST)
+        form = TarefaForm(request.POST, instance=tarefa)
+        if form.is_valid():
+            form.save()
+            return redirect('core')
+    else:
+        form = TarefaForm(instance=tarefa)
+    return render(request, 'tarefas/nova_tarefa.html', {'form': form})
+
+
 
