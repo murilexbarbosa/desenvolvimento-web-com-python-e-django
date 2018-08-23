@@ -39,6 +39,11 @@ def delete_tarefa(request, id):
     return redirect('core')
 
 
+def delete_categoria(request, id):
+    categoria = Categoria.objects.get(id=id).delete()
+    return redirect('lista_categoria')
+
+
 def editar_tarefa(request, id):
     tarefa = Tarefa.objects.get(id=id)
     if request.method == 'POST':
@@ -51,4 +56,13 @@ def editar_tarefa(request, id):
     return render(request, 'tarefas/nova_tarefa.html', {'form': form})
 
 
-
+def editar_categoria(request, id):
+    categoria = get_object_or_404(Categoria, id=id)
+    if request.method == 'POST':
+        form = CategoriaForm(request.POST, instance=categoria)
+        if form.is_valid():
+            form.save()
+            return redirect('lista_categoria')
+    else:
+        form = CategoriaForm(instance=categoria)
+    return render(request, 'tarefas/nova_categoria.html', {'form': form})

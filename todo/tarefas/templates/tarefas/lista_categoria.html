@@ -7,6 +7,7 @@
             <tr>
                 <th>Categoria</th>
                 <th>Descrição</th>
+                <th colspan="2" style="text-align:center">Ações</th>
             </tr>
         </thead>
         <tbody>
@@ -14,6 +15,8 @@
                 <tr>
                     <td>{{ c.nome }}</td>
                     <td>{{ c.descricao }}</td>
+                        <td><a href="{% url 'delete_categoria' c.id %}" class="btn btn-danger btn-sm">Excluir</a></td>
+                        <td><a href="{% url 'editar_categoria' c.id %}" class="btn btn-info btn-sm">Editar</a></td>
                 </tr>
             {% endfor %}
         </tbody>

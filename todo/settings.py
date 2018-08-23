@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'todo.core',
     'todo.tarefas',
+    'todo.accounts',
 ]
 
 MIDDLEWARE = [
