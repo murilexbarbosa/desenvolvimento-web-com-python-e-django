@@ -18,6 +18,7 @@ def add_user(request):
         form = UserForm()
     return render(request, 'accounts/add_user.html', {'form': form})
 
+
 def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -30,6 +31,6 @@ def login_user(request):
             return redirect('core')
         else:
             messages.error(request, 'Usuário ou senha inválido.')
-    else:
-        render(request, 'accounts/user_login.html')
+
+    return render(request, 'accounts/user_login.html')
 
