@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 
 from .forms import UserForm
@@ -33,6 +34,22 @@ def login_user(request):
             messages.error(request, 'Usuário ou senha inválido.')
 
     return render(request, 'accounts/user_login.html')
+
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Senha alterada com Sucesso!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Erro ao alterar senha!')
+    else:
+        form = PasswordChangeForm(request.user)
+
+    return render(request, 'accounts/change_password.html', {"form": form})
 
 def logout_user(request):
     logout(request)

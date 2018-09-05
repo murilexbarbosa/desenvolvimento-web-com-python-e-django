@@ -1,4 +1,6 @@
 {% load staticfiles %}
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -34,9 +36,9 @@
           <li class="nav-item"><a class="nav-link" href="{% url 'nova_tarefa' %}">Tarefas</a></li>
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
-              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% if user.is_authenticated %}{{ user.get_full_name }} {% endif %}</a>
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{% if user.is_authenticated %}{{ user.get_full_name|default:user.username }} {% endif %}</a>
               <div class="dropdown-menu" aria-labelledby="dropdown01">
-                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="{% url 'change_password' %}">Trocar Senha</a>
                 <a class="dropdown-item" href="#">Another action</a>
                 <a class="dropdown-item" href="{% url 'logout_user' %}">Sair</a>
               </div>

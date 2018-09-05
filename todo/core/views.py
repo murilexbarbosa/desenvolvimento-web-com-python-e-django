@@ -8,6 +8,6 @@ from todo.tarefas.models import Tarefa
 # Create your views here.
 @login_required
 def home(request):
-    tarefa = Tarefa.objects.all()
+    tarefa = Tarefa.objects.filter(user=request.user)
     return render(request, 'core/index.html', {'tarefas': tarefa})
 

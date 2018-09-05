@@ -11,7 +11,9 @@ def nova_categoria(request):
     if request.method == 'POST':
         form = CategoriaForm(request.POST)
         if form.is_valid():
-            form.save()
+            f = form.save(commit=False)
+            f.user = request.user
+            f.save()
             return redirect('lista_categoria')
         else:
             print(form.errors)
@@ -22,7 +24,7 @@ def nova_categoria(request):
 
 @login_required
 def lista_categoria(request):
-    categorias = Categoria.objects.all()
+    categorias = Categoria.objects.filter(user=request.user)
     return render(request, 'tarefas/lista_categoria.html', {'categorias': categorias})
 
 
@@ -67,7 +69,7 @@ def editar_tarefa(request, id):
 
 @login_required
 def editar_categoria(request, id):
-    categoria = get_object_or_404(Categoria, id=id)
+    categoria = get_object_or_404(Categoria, id=id, user=request.user)
     if request.method == 'POST':
         form = CategoriaForm(request.POST, instance=categoria)
         if form.is_valid():
