@@ -14,4 +14,4 @@ class CategoriaForm(forms.ModelForm):
 class TarefaForm(forms.ModelForm):
     class Meta:
         model = Tarefa
-        fields = '__all__'
+        exclude = ('user',)

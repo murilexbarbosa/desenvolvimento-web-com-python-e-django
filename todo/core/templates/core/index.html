@@ -3,6 +3,7 @@
 {% block body %}
     <div class="row">
         <h1>Lista de Tarefas</h1>
+        {% if tarefas %}
         <table class="table">
             <thead>
                 <tr>
@@ -28,7 +29,17 @@
                 {% endfor %}
             </tbody>
         </table>
-        <a href="{% url 'nova_tarefa' %}" class="btn btn_default">Adicionar Tarefa</a>
+        {% else %}
+        <div class="container">
+            <div class="alert alert-info">
+                <p>Não há tarefas disponíveis.</p>
+            </div>
+        </div>
+        {% endif %}
+        <div class="container">
+            <a href="{% url 'nova_tarefa' %}" class="btn btn-info" role="button">Adicionar Tarefa</a>
+        </div>
+
     </div>
 
 {% endblock body %}

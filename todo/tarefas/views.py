@@ -33,7 +33,9 @@ def nova_tarefa(request):
     if request.method == 'POST':
         form = TarefaForm(request.POST)
         if form.is_valid():
-            form.save()
+            f = form.save(commit=False)
+            f.user = request.user
+            f.save()
             return redirect('core')
         else:
             print(form.errors)
@@ -44,13 +46,13 @@ def nova_tarefa(request):
 
 @login_required
 def delete_tarefa(request, id):
-    tarefa = Tarefa.objects.get(id=id).delete()
+    tarefa = Tarefa.objects.get(id=id, user=request.user).delete()
     return redirect('core')
 
 
 @login_required
 def delete_categoria(request, id):
-    categoria = Categoria.objects.get(id=id).delete()
+    categoria = Categoria.objects.get(id=id, user=request.user).delete()
     return redirect('lista_categoria')
 
 
